@@ -1,2 +1,3 @@
 rootProject.name = "Congresso Informativo"
-include(":app")
+include(":app" )
+include(":camara-repository")

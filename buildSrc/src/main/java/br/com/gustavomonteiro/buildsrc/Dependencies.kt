@@ -89,4 +89,31 @@ internal object Dependencies {
             return listOf(junit, espresso)
         }
     }
+
+    object Retrofit : Dependency {
+        private const val retrofitVersion = "2.8.1"
+
+        private const val retrofit = "com.squareup.retrofit2:retrofit:$retrofitVersion"
+        private const val retrofitAdapter =
+            "com.squareup.retrofit2:converter-moshi:$retrofitVersion"
+
+        override fun getDependencies(): List<String> {
+            return listOf(retrofit, retrofitAdapter)
+        }
+    }
+
+    object Glide : Dependency {
+        private const val glideVersion = "4.11.0"
+
+        private const val glide = "com.github.bumptech.glide:glide:$glideVersion"
+        private const val glideCompiler = "com.github.bumptech.glide:compiler:$glideVersion"
+
+        override fun getDependencies(): List<String> {
+            return listOf(glide)
+        }
+
+        fun getCompiler(): String {
+            return glideCompiler
+        }
+    }
 }

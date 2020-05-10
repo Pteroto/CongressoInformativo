@@ -38,6 +38,20 @@ fun DependencyHandler.androidTest() {
     }
 }
 
+fun DependencyHandler.retrofit() {
+    Dependencies.Retrofit().forEach {
+        implementation(it)
+    }
+}
+
+fun DependencyHandler.glide() {
+    Dependencies.Glide.apply {
+        kapt(getCompiler())
+    }().forEach {
+        implementation(it)
+    }
+}
+
 private fun DependencyHandler.implementation(depName: String) {
     add("implementation", depName)
 }

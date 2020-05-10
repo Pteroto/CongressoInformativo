@@ -1,7 +1,7 @@
 import br.com.gustavomonteiro.buildsrc.*
 
 plugins {
-    id("com.android.application")
+    id("com.android.library")
     id("kotlin-android")
     id("kotlin-android-extensions")
 }
@@ -11,7 +11,6 @@ android {
     buildToolsVersion(AndroidConfig.buildToolsVersion)
 
     defaultConfig {
-        applicationId = "br.com.gustavomonteiro.congressoinformativo"
         minSdkVersion(AndroidConfig.minSdkVersion)
         targetSdkVersion(AndroidConfig.targetSdkVersion)
         versionCode = AndroidConfig.versionCode
@@ -43,11 +42,9 @@ android {
 
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
-    implementation(project(":camara-repository"))
     kotlin()
-    android()
     lifecycle()
-    ktx()
+    retrofit()
     test()
     androidTest()
 }
