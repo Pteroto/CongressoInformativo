@@ -91,7 +91,7 @@ internal object Dependencies {
     }
 
     object Retrofit : Dependency {
-        private const val retrofitVersion = "2.8.1"
+        private const val retrofitVersion = "2.8.2"
 
         private const val retrofit = "com.squareup.retrofit2:retrofit:$retrofitVersion"
         private const val retrofitAdapter =
@@ -112,8 +112,26 @@ internal object Dependencies {
             return listOf(glide)
         }
 
-        fun getCompiler(): String {
-            return glideCompiler
+        fun getCompiler(): List<String> {
+            return listOf(glideCompiler)
+        }
+    }
+
+    object Dagger : Dependency {
+        private const val daggerVersion = "2.27"
+
+        private const val dagger = "com.google.dagger:dagger:$daggerVersion"
+        private const val daggerCompiler = "com.google.dagger:dagger-compiler:$daggerVersion"
+        private const val daggerAndroid = "com.google.dagger:dagger-android:$daggerVersion"
+        private const val daggerAndroidCompiler =
+            "com.google.dagger:dagger-android-processor:$daggerVersion"
+
+        override fun getDependencies(): List<String> {
+            return listOf(dagger, daggerAndroid)
+        }
+
+        fun getCompiler(): List<String> {
+            return listOf(daggerCompiler, daggerAndroidCompiler)
         }
     }
 }

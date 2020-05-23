@@ -4,14 +4,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import br.com.gustavomonteiro.congressoinformativo.camararepository.api.ApiBuilder
-import br.com.gustavomonteiro.congressoinformativo.camararepository.api.DeputadoRetrofitImpl
+import br.com.gustavomonteiro.congressoinformativo.camararepository.DeputadoRepository
 import br.com.gustavomonteiro.congressoinformativo.camararepository.models.DeputadoDetail
 import br.com.gustavomonteiro.congressoinformativo.camararepository.models.ResultDeputadoDetail
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class MainViewModel : ViewModel() {
+class MainViewModel(private val repository: DeputadoRepository) : ViewModel() {
     private val internalDeputado = MutableLiveData<DeputadoDetail>()
     val deputado: LiveData<DeputadoDetail>
         get() = internalDeputado
@@ -21,10 +20,9 @@ class MainViewModel : ViewModel() {
         get() = internalError
 
     fun getDeputado(id: String) {
-        val api = DeputadoRetrofitImpl(ApiBuilder().createApi())
         viewModelScope.launch(Dispatchers.IO) {
             val deputadoId = if (id.isNotBlank()) id else "9999"
-            when (val result = api.getDeputado(deputadoId)) {
+            when (val result = repository.getDeputado(deputadoId)) {
                 is ResultDeputadoDetail.Success -> internalDeputado.postValue(result.deputado)
                 is ResultDeputadoDetail.Error -> internalError.postValue(result.errorMsg)
             }

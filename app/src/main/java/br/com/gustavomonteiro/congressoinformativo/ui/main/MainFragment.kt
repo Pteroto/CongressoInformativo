@@ -2,47 +2,46 @@ package br.com.gustavomonteiro.congressoinformativo.ui.main
 
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import br.com.gustavomonteiro.congressoinformativo.AppApplication
 import br.com.gustavomonteiro.congressoinformativo.R
+import br.com.gustavomonteiro.congressoinformativo.databinding.MainFragmentBinding
 import br.com.gustavomonteiro.congressoinformativo.ui.main.viewmodel.MainViewModel
 import br.com.gustavomonteiro.congressoinformativo.ui.main.viewmodel.MainViewModelFactory
-import kotlinx.android.synthetic.main.main_fragment.*
+import javax.inject.Inject
 
-class MainFragment : Fragment() {
+class MainFragment : Fragment(R.layout.main_fragment) {
 
     companion object {
         fun newInstance() = MainFragment()
     }
 
-    private val viewModel: MainViewModel by viewModels { MainViewModelFactory() }
+    @Inject
+    lateinit var vmFactory: MainViewModelFactory
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        return inflater.inflate(R.layout.main_fragment, container, false)
-    }
+    private val viewModel: MainViewModel by viewModels { vmFactory }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val binding = MainFragmentBinding.bind(view)
+        (activity?.application as AppApplication).component.inject(this)
+
         viewModel.deputado.observe(viewLifecycleOwner, Observer {
-            result.text = it.nomeCivil
+            binding.result.text = it.nomeCivil
             Log.d("teste", it.nomeCivil)
         })
 
         viewModel.error.observe(viewLifecycleOwner, Observer {
-            result.text = it
+            binding.result.text = it
             Log.d("teste", it)
         })
 
-        test_button.setOnClickListener {
-            result.text = ""
-           viewModel.getDeputado(edittext.text.toString())
+        binding.testButton.setOnClickListener {
+            binding.result.text = ""
+            viewModel.getDeputado(binding.editText.text.toString())
         }
     }
 }

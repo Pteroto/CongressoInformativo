@@ -46,7 +46,19 @@ fun DependencyHandler.retrofit() {
 
 fun DependencyHandler.glide() {
     Dependencies.Glide.apply {
-        kapt(getCompiler())
+        getCompiler().forEach {
+            kapt(it)
+        }
+    }().forEach {
+        implementation(it)
+    }
+}
+
+fun DependencyHandler.dagger() {
+    Dependencies.Dagger.apply {
+        getCompiler().forEach {
+            kapt(it)
+        }
     }().forEach {
         implementation(it)
     }
