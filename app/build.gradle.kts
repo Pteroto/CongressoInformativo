@@ -12,7 +12,7 @@ android {
     buildToolsVersion(AndroidConfig.buildToolsVersion)
 
     defaultConfig {
-        applicationId = "br.com.gustavomonteiro.congressoinformativo"
+        applicationId = "br.com.gustavomonteiro.infocongresso"
         minSdkVersion(AndroidConfig.minSdkVersion)
         targetSdkVersion(AndroidConfig.targetSdkVersion)
         versionCode = AndroidConfig.versionCode

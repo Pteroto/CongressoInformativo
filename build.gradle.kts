@@ -1,6 +1,7 @@
 buildscript {
     val kotlinVersion by extra("1.3.72")
     val androidGradleVersion by extra("4.0.0-rc01")
+    val kotlin_version by extra("1.3.72")
 
     repositories {
         google()
