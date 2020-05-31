@@ -1,7 +1,9 @@
+@file:Suppress("UnstableApiUsage")
+
 import br.com.gustavomonteiro.buildsrc.*
 
 plugins {
-    id("com.android.application")
+    id("com.android.library")
     id("kotlin-android")
     id("kotlin-android-extensions")
     id("kotlin-kapt")
@@ -12,7 +14,6 @@ android {
     buildToolsVersion(AndroidConfig.buildToolsVersion)
 
     defaultConfig {
-        applicationId = "br.com.gustavomonteiro.infocongresso"
         minSdkVersion(AndroidConfig.minSdkVersion)
         targetSdkVersion(AndroidConfig.targetSdkVersion)
         versionCode = AndroidConfig.versionCode
@@ -43,20 +44,18 @@ android {
     buildFeatures {
         viewBinding = true
     }
-
 }
 
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
     implementation(project(":core"))
-    implementation(project(":deputado"))
     implementation(project(":camara-repository"))
     kotlin()
     android()
     lifecycle()
     ktx()
+    retrofit()
     test()
     androidTest()
-    glide()
     dagger()
 }

@@ -55,7 +55,7 @@ internal object Dependencies {
 
     object Android : Dependency {
         private const val appCompatVersion = "1.1.0"
-        private const val constraintLayoutVersion = "1.1.3"
+        private const val constraintLayoutVersion = "2.0.0-beta6"
 
         private const val appCompat = "androidx.appcompat:appcompat:$appCompatVersion"
         private const val constraintLayout =

@@ -1,15 +1,15 @@
 package br.com.gustavomonteiro.infocongresso.di
 
-import br.com.gustavomonteiro.infocongresso.ui.main.MainFragment
+import br.com.gustavomonteiro.deputado.di.DeputadoComponent
 import dagger.Component
 
-@Component(modules = [RepositoryModule::class, MainFragmentModule::class])
+@Component(modules = [SubComponentsModule::class])
 interface AppComponent {
-
-    fun inject(mainFragment: MainFragment)
 
     @Component.Builder
     interface Builder {
         fun build(): AppComponent
     }
+
+    fun deputadoComponent(): DeputadoComponent.Builder
 }

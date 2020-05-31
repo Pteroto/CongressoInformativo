@@ -12,4 +12,7 @@ interface CamaraApi {
 
     @GET("deputados")
     fun getDeputados(): Call<ResponseDeputadoList>
+
+    @GET("deputados")
+    suspend fun getNewDeputados(): ResponseDeputadoList
 }

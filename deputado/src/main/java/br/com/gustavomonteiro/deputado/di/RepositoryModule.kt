@@ -1,4 +1,4 @@
-package br.com.gustavomonteiro.infocongresso.di
+package br.com.gustavomonteiro.deputado.di
 
 import br.com.gustavomonteiro.camararepository.DeputadoRepository
 import br.com.gustavomonteiro.camararepository.api.ApiBuilder
