@@ -9,25 +9,24 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import br.com.gustavomonteiro.camararepository.models.Deputado
 import br.com.gustavomonteiro.camararepository.models.ResultDeputadoList
+import br.com.gustavomonteiro.core.viewBinding
 import br.com.gustavomonteiro.deputado.DeputadoHomeActivity
 import br.com.gustavomonteiro.deputado.R
+import br.com.gustavomonteiro.deputado.databinding.DeputadoHomeFragmentBinding
 import br.com.gustavomonteiro.deputado.di.ActivityScope
 import br.com.gustavomonteiro.deputado.presentation.DeputadoHomeViewModel
 import br.com.gustavomonteiro.deputado.presentation.factory.DeputadoHomeViewModelFactory
+import com.bumptech.glide.Glide
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import javax.inject.Inject
 
 class DeputadoHomeFragment : Fragment(R.layout.deputado_home_fragment) {
 
-    companion object {
-        fun newInstance() = DeputadoHomeFragment()
-    }
-
     @ActivityScope
     @Inject
     lateinit var vmFactory: DeputadoHomeViewModelFactory
-
     private val viewModel: DeputadoHomeViewModel by viewModels { vmFactory }
+    private val binding by viewBinding(DeputadoHomeFragmentBinding::bind)
 
     override fun onAttach(context: Context) {
         (activity as DeputadoHomeActivity).deputadoComponent.inject(this)
@@ -48,6 +47,7 @@ class DeputadoHomeFragment : Fragment(R.layout.deputado_home_fragment) {
     }
 
     private fun onSucess(deputados: List<Deputado>) {
+        Glide.with(this).load(deputados[0].urlFoto).into(binding.deputadoImage)
         deputados.forEach {
             Log.d("teste", it.nome)
         }
@@ -59,6 +59,10 @@ class DeputadoHomeFragment : Fragment(R.layout.deputado_home_fragment) {
 
     private fun setLoading(boolean: Boolean) {
         Log.d("teste", boolean.toString())
+    }
+
+    companion object {
+        fun newInstance() = DeputadoHomeFragment()
     }
 }
 

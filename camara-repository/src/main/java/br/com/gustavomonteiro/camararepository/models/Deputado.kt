@@ -9,5 +9,5 @@ data class Deputado(
     val siglaUf: String,
     val uri: String,
     val uriPartido: String,
-    val uriFoto: String
+    val urlFoto: String
 )

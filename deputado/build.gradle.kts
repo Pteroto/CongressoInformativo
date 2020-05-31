@@ -58,4 +58,5 @@ dependencies {
     test()
     androidTest()
     dagger()
+    glide()
 }
