@@ -56,18 +56,24 @@ internal object Dependencies {
     object Android : Dependency {
         private const val appCompatVersion = "1.1.0"
         private const val constraintLayoutVersion = "2.0.0-beta6"
+        private const val recyclerViewVersion = "28.0.0"
+        private const val cardViewVersion = "28.0.0"
+        private const val materialComponentsVersion = "1.1.0"
 
         private const val appCompat = "androidx.appcompat:appcompat:$appCompatVersion"
         private const val constraintLayout =
             "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion"
+        private const val recyclerView = "com.android.support:recyclerview-v7:$recyclerViewVersion"
+        private const val cardView = "com.android.support:cardview-v7:$cardViewVersion"
+        private const val materialComponents = "com.google.android.material:material:$materialComponentsVersion"
 
         override fun getDependencies(): List<String> {
-            return listOf(appCompat, constraintLayout)
+            return listOf(appCompat, constraintLayout, recyclerView, cardView, materialComponents)
         }
     }
 
     object Test : Dependency {
-        private const val junitVersion = "4.12"
+        private const val junitVersion = "4.13"
 
         private const val junit = "junit:junit:$junitVersion"
         private const val coroutineTest =

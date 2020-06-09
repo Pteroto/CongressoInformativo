@@ -20,7 +20,6 @@ class DeputadoHomeViewModel(private val repository: DeputadoRepository) : ViewMo
         }.catch {
             emit(ResultDeputadoList.Failure("Error: ${it.message}"))
         }.collect {
-            emit(ResultDeputadoList.Loading(false))
             emit(it)
         }
     }
