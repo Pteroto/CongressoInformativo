@@ -26,7 +26,6 @@
             android:layout_height="wrap_content"
             android:scaleType="centerCrop"
             android:minHeight="140dp"
-            android:src="@drawable/como_vota_deputado"
             tools:ignore="ContentDescription" />
 
         <TextView
