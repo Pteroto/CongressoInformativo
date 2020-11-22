@@ -1,7 +1,7 @@
 package br.com.gustavomonteiro.buildsrc
 
 internal object Dependencies {
-    private const val coroutineVersion = "1.3.5"
+    private const val coroutineVersion = "1.4.1"
 
     private interface Dependency {
         fun getDependencies(): List<String>
@@ -12,7 +12,7 @@ internal object Dependencies {
     }
 
     object Kotlin : Dependency {
-        private const val kotlinVersion = "1.3.72"
+        private const val kotlinVersion = "1.4.10"
 
         private const val kotlinStdLib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
 

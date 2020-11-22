@@ -29,7 +29,7 @@ class DeputadoAdapter(
         holder.bindView(deputadoList[position], onItemClick)
     }
 
-    class DeputadoHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class DeputadoHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         fun bindView(deputado: Deputado, onItemClick: (Deputado) -> Unit) {
             val photo = itemView.findViewById<ImageView>(R.id.deputadoPhoto)

@@ -2,9 +2,8 @@ package br.com.gustavomonteiro.camararepository.api
 
 import br.com.gustavomonteiro.camararepository.DeputadoRepository
 import br.com.gustavomonteiro.camararepository.models.ResultDeputadoDetail
-import br.com.gustavomonteiro.camararepository.models.ResultDeputadoList
+import br.com.gustavomonteiro.camararepository.models.ResultDeputadoRequest
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.flowOn
@@ -26,27 +25,26 @@ class DeputadoRetrofitImpl(private val api: CamaraApi) : DeputadoRepository {
         }
     }
 
-    override suspend fun getDeputados(): ResultDeputadoList {
+    override suspend fun getDeputados(): ResultDeputadoRequest {
         try {
             val response = api.getDeputados().execute()
             response.body()?.let {
                 return when {
-                    response.isSuccessful -> ResultDeputadoList.Success(it.deputados)
-                    else -> ResultDeputadoList.Failure(UNKNOWN_ERROR_MSG)
+                    response.isSuccessful -> ResultDeputadoRequest.Success(it.deputados)
+                    else -> ResultDeputadoRequest.Failure(UNKNOWN_ERROR_MSG)
                 }
-            } ?: return ResultDeputadoList.Failure(UNKNOWN_ERROR_MSG)
+            } ?: return ResultDeputadoRequest.Failure(UNKNOWN_ERROR_MSG)
         } catch (exception: Exception) {
-            return ResultDeputadoList.Failure("Error msg: ${exception.message ?: DEPUTADO_NOT_FOUND_MSG}")
+            return ResultDeputadoRequest.Failure("Error msg: ${exception.message ?: DEPUTADO_NOT_FOUND_MSG}")
         }
     }
 
-    @ExperimentalCoroutinesApi
-    override suspend fun getNewDeputados(): Flow<ResultDeputadoList> {
+    override suspend fun getNewDeputados(): Flow<ResultDeputadoRequest> {
         return flowOf(
             try {
-                ResultDeputadoList.Success(api.getNewDeputados().deputados)
+                ResultDeputadoRequest.Success(api.getNewDeputados().deputados)
             } catch (exception: Exception) {
-                ResultDeputadoList.Failure("Error msg: ${exception.message ?: UNKNOWN_ERROR_MSG}")
+                ResultDeputadoRequest.Failure("Error msg: ${exception.message ?: UNKNOWN_ERROR_MSG}")
             }
         ).flowOn(Dispatchers.IO)
     }

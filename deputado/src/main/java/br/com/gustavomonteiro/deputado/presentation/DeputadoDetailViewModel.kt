@@ -1,5 +1,7 @@
 package br.com.gustavomonteiro.deputado.presentation
 
-class DeputadoDetailViewModel {
+import androidx.lifecycle.ViewModel
+
+class DeputadoDetailViewModel: ViewModel() {
 
 }

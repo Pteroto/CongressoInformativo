@@ -2,14 +2,13 @@ package br.com.gustavomonteiro.deputado.ui
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.View
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import br.com.gustavomonteiro.camararepository.models.Deputado
-import br.com.gustavomonteiro.camararepository.models.ResultDeputadoList
+import br.com.gustavomonteiro.camararepository.models.ResultDeputadoRequest
 import br.com.gustavomonteiro.core.viewBinding
 import br.com.gustavomonteiro.deputado.DeputadoHomeActivity
 import br.com.gustavomonteiro.deputado.R
@@ -17,8 +16,6 @@ import br.com.gustavomonteiro.deputado.databinding.DeputadoHomeFragmentBinding
 import br.com.gustavomonteiro.deputado.di.ActivityScope
 import br.com.gustavomonteiro.deputado.presentation.DeputadoHomeViewModel
 import br.com.gustavomonteiro.deputado.presentation.factory.DeputadoHomeViewModelFactory
-import kotlinx.android.synthetic.main.deputado_home_fragment.*
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import javax.inject.Inject
 
 class DeputadoHomeFragment : Fragment(R.layout.deputado_home_fragment) {
@@ -34,49 +31,59 @@ class DeputadoHomeFragment : Fragment(R.layout.deputado_home_fragment) {
         super.onAttach(context)
     }
 
-    @ExperimentalCoroutinesApi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        recyclerView.apply {
+        binding.recyclerView.apply {
             setHasFixedSize(true)
             layoutManager = GridLayoutManager(view.context, 3)
             clipToPadding = false
         }
 
-        viewModel.deputadosList.observe(viewLifecycleOwner, Observer {
+        viewModel.requestResult.observe(viewLifecycleOwner, {
             when (it) {
-                is ResultDeputadoList.Success -> onSucess(it.deputadoList)
-                is ResultDeputadoList.Failure -> onFailure(it.errorMsg)
-                is ResultDeputadoList.Loading -> setLoading(it.status)
+                is ResultDeputadoRequest.Success -> onSucess(it.deputadoList)
+                is ResultDeputadoRequest.Failure -> onFailure(it.errorMsg)
+                is ResultDeputadoRequest.Loading -> setLoading(it.status)
             }
         })
     }
 
     private fun onSucess(deputados: List<Deputado>) {
-        recyclerView.adapter = DeputadoAdapter(deputados) {
-            onDeputadoClick(it)
-        }
-
         setLoading(false)
+        binding.recyclerView.adapter = DeputadoAdapter(deputados) { deputado ->
+            onDeputadoClick(deputado)
+        }
     }
 
     private fun onFailure(errorMsg: String) {
-        Log.d("teste", errorMsg)
+        setLoading(false)
+        showDialogError(errorMsg)
     }
 
     private fun setLoading(boolean: Boolean) {
         if (boolean) {
-            Log.d("teste", "show")
-            progressBar.show()
+            binding.progressBar.show()
         } else {
-            Log.d("teste", "hide")
-            progressBar.hide()
+            binding.progressBar.hide()
         }
     }
 
     private fun onDeputadoClick(deputado: Deputado) {
-        Log.d("teste", deputado.nome)
+        (activity as DeputadoHomeActivity?)?.gotoDetailFragment(deputado)
+    }
+
+    private fun showDialogError(errorMsg: String) {
+        val alertDialogBuilder = AlertDialog.Builder(requireContext())
+        alertDialogBuilder.setTitle("Erro")
+        alertDialogBuilder.setMessage(errorMsg)
+        alertDialogBuilder.setPositiveButton("Tentar Novamente") { _, _ ->
+            viewModel.retryOnClick()
+        }
+        alertDialogBuilder.setNegativeButton("Fechar") { _, _ ->
+            activity?.onBackPressed()
+        }
+        alertDialogBuilder.create().show()
     }
 
     companion object {
