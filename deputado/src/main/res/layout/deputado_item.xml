@@ -24,8 +24,9 @@
             android:id="@+id/deputadoPhoto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:scaleType="fitCenter"
-            android:transitionName="sharedView"
+            android:scaleType="centerCrop"
+            android:minHeight="140dp"
+            android:src="@drawable/como_vota_deputado"
             tools:ignore="ContentDescription" />
 
         <TextView
