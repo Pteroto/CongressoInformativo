@@ -8,7 +8,7 @@ import br.com.gustavomonteiro.deputado.presentation.DeputadoHomeViewModel
 class DeputadoHomeViewModelFactory(private val repository: DeputadoRepository) :
     ViewModelProvider.Factory {
     @Suppress("UNCHECKED_CAST")
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return if (modelClass.isAssignableFrom(DeputadoHomeViewModel::class.java)) {
             DeputadoHomeViewModel(repository) as T
         } else {
