@@ -16,5 +16,13 @@ jobs:
         with:
           distribution: 'adopt'
           java-version: 11
+      - name: Cache local Gradle repository
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.gradle/caches/
+            ~/.gradle/wrapper/
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
+          restore-keys: ${{ runner.os }}-gradle
       - name: Build with Gradle
         run: ./gradlew build
