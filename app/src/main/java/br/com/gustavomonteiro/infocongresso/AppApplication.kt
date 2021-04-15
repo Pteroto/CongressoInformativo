@@ -6,7 +6,7 @@ import br.com.gustavomonteiro.deputado.di.DeputadoComponentProvider
 import br.com.gustavomonteiro.infocongresso.di.AppComponent
 import br.com.gustavomonteiro.infocongresso.di.DaggerAppComponent
 
-class AppApplication: Application(), DeputadoComponentProvider {
+class AppApplication : Application(), DeputadoComponentProvider {
 
     lateinit var component: AppComponent
 
