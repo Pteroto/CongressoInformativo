@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.flowOn
 
-@Suppress("BlockingMethodInNonBlockingContext") //Bug https://youtrack.jetbrains.com/issue/KT-30320
+@Suppress("BlockingMethodInNonBlockingContext") // Bug https://youtrack.jetbrains.com/issue/KT-30320
 class DeputadoRetrofitImpl(private val api: CamaraApi) : DeputadoRepository {
     override suspend fun getDeputado(id: String): ResultDeputadoDetail {
         try {
@@ -21,7 +21,11 @@ class DeputadoRetrofitImpl(private val api: CamaraApi) : DeputadoRepository {
                 }
             } ?: return ResultDeputadoDetail.Error(DEPUTADO_NOT_FOUND_MSG)
         } catch (exception: Exception) {
-            return ResultDeputadoDetail.Error("Error msg: ${exception.message ?: DEPUTADO_NOT_FOUND_MSG}")
+            return ResultDeputadoDetail.Error(
+                "Error msg: ${
+                    exception.message ?: DEPUTADO_NOT_FOUND_MSG
+                }"
+            )
         }
     }
 
@@ -35,7 +39,11 @@ class DeputadoRetrofitImpl(private val api: CamaraApi) : DeputadoRepository {
                 }
             } ?: return ResultDeputadoRequest.Failure(UNKNOWN_ERROR_MSG)
         } catch (exception: Exception) {
-            return ResultDeputadoRequest.Failure("Error msg: ${exception.message ?: DEPUTADO_NOT_FOUND_MSG}")
+            return ResultDeputadoRequest.Failure(
+                "Error msg: ${
+                    exception.message ?: DEPUTADO_NOT_FOUND_MSG
+                }"
+            )
         }
     }
 
@@ -44,7 +52,11 @@ class DeputadoRetrofitImpl(private val api: CamaraApi) : DeputadoRepository {
             try {
                 ResultDeputadoRequest.Success(api.getNewDeputados().deputados)
             } catch (exception: Exception) {
-                ResultDeputadoRequest.Failure("Error msg: ${exception.message ?: UNKNOWN_ERROR_MSG}")
+                ResultDeputadoRequest.Failure(
+                    "Error msg: ${
+                        exception.message ?: UNKNOWN_ERROR_MSG
+                    }"
+                )
             }
         ).flowOn(Dispatchers.IO)
     }

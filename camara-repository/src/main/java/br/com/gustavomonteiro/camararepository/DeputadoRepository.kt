@@ -12,7 +12,7 @@ interface DeputadoRepository {
     suspend fun getNewDeputados(): Flow<ResultDeputadoRequest>
 
     companion object Factory {
-        fun makeRetrofit(api: CamaraApi) : DeputadoRepository{
+        fun makeRetrofit(api: CamaraApi): DeputadoRepository {
             return DeputadoRetrofitImpl(api)
         }
     }
