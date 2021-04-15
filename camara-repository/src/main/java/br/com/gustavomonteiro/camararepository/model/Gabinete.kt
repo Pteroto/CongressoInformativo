@@ -1,4 +1,4 @@
-package br.com.gustavomonteiro.camararepository.models
+package br.com.gustavomonteiro.camararepository.model
 
 data class Gabinete(
     val nome: String,

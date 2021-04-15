@@ -6,13 +6,14 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import br.com.gustavomonteiro.camararepository.models.Deputado
+import br.com.gustavomonteiro.camararepository.model.Deputado
 import br.com.gustavomonteiro.deputado.R
 import com.bumptech.glide.Glide
+import com.skydoves.transformationlayout.TransformationLayout
 
 class DeputadoAdapter(
     private val deputadoList: List<Deputado>,
-    private val onItemClick: (Deputado) -> Unit
+    private val onItemClick: (Deputado, TransformationLayout) -> Unit
 ) : RecyclerView.Adapter<DeputadoAdapter.DeputadoHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DeputadoHolder {
@@ -31,14 +32,18 @@ class DeputadoAdapter(
 
     inner class DeputadoHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        fun bindView(deputado: Deputado, onItemClick: (Deputado) -> Unit) {
+        fun bindView(deputado: Deputado, onItemClick: (Deputado, TransformationLayout) -> Unit) {
             val photo = itemView.findViewById<ImageView>(R.id.deputadoPhoto)
             val name = itemView.findViewById<TextView>(R.id.deputadoName)
+
+            val transformationLayout =
+                itemView.findViewById<TransformationLayout>(R.id.transformationLayout)
+            transformationLayout.transitionName = deputado.nome
 
             Glide.with(itemView).load(deputado.urlFoto).into(photo)
             name.text = deputado.nome
             itemView.setOnClickListener {
-                onItemClick(deputado)
+                onItemClick(deputado, transformationLayout)
             }
         }
     }

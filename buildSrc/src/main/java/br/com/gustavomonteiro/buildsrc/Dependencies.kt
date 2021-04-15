@@ -1,7 +1,8 @@
 package br.com.gustavomonteiro.buildsrc
 
-internal object Dependencies {
+object Dependencies {
     private const val coroutineVersion = "1.4.1"
+    const val composeVersion = "1.0.0-beta01"
 
     private interface Dependency {
         fun getDependencies(): List<String>
@@ -12,7 +13,7 @@ internal object Dependencies {
     }
 
     object Kotlin : Dependency {
-        private const val kotlinVersion = "1.4.10"
+        private const val kotlinVersion = "1.4.30"
 
         private const val kotlinStdLib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
 
@@ -65,7 +66,8 @@ internal object Dependencies {
             "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion"
         private const val recyclerView = "com.android.support:recyclerview-v7:$recyclerViewVersion"
         private const val cardView = "com.android.support:cardview-v7:$cardViewVersion"
-        private const val materialComponents = "com.google.android.material:material:$materialComponentsVersion"
+        private const val materialComponents =
+            "com.google.android.material:material:$materialComponentsVersion"
 
         override fun getDependencies(): List<String> {
             return listOf(appCompat, constraintLayout, recyclerView, cardView, materialComponents)
@@ -85,11 +87,12 @@ internal object Dependencies {
     }
 
     object AndroidTest : Dependency {
-        private const val junitVersion = "1.1.1"
+        private const val junitVersion = "1.1.2"
         private const val espressoVersion = "3.2.0"
 
         private const val junit = "androidx.test.ext:junit:$junitVersion"
         private const val espresso = "androidx.test.espresso:espresso-core:$espressoVersion"
+        private const val compose = "androidx.compose.ui:ui-test-junit4:$composeVersion"
 
         override fun getDependencies(): List<String> {
             return listOf(junit, espresso)
@@ -138,6 +141,41 @@ internal object Dependencies {
 
         fun getCompiler(): List<String> {
             return listOf(daggerCompiler, daggerAndroidCompiler)
+        }
+    }
+
+    object Compose : Dependency {
+        private const val composeActivityVersion = "1.3.0-alpha03"
+        private const val composeViewModelVersion = "1.0.0-alpha02"
+
+        private const val composeUi = "androidx.compose.ui:ui:$composeVersion"
+        private const val composeUiTooling = "androidx.compose.ui:ui-tooling:$composeVersion"
+        private const val composeFoundation =
+            "androidx.compose.foundation:foundation:$composeVersion"
+        private const val composeMaterial = "androidx.compose.material:material:$composeVersion"
+        private const val composeMaterialIconsCore =
+            "androidx.compose.material:material-icons-core:$composeVersion"
+        private const val composeMaterialIconsExtended =
+            "androidx.compose.material:material-icons-extended:$composeVersion"
+        private const val composeLiveData =
+            "androidx.compose.runtime:runtime-livedata:$composeVersion"
+        private const val composeActivity =
+            "androidx.activity:activity-compose:$composeActivityVersion"
+        private const val composeViewModel =
+            "androidx.lifecycle:lifecycle-viewmodel-compose:$composeViewModelVersion"
+
+        override fun getDependencies(): List<String> {
+            return listOf(
+                composeUi,
+                composeUiTooling,
+                composeFoundation,
+                composeMaterial,
+                composeMaterialIconsCore,
+                composeMaterialIconsExtended,
+                composeLiveData,
+                composeActivity,
+                composeViewModel
+            )
         }
     }
 }

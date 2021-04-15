@@ -34,7 +34,7 @@ fun DependencyHandler.test() {
 
 fun DependencyHandler.androidTest() {
     Dependencies.AndroidTest().forEach {
-        testImplementation(it)
+        androidTestImplementation(it)
     }
 }
 
@@ -49,8 +49,9 @@ fun DependencyHandler.glide() {
         getCompiler().forEach {
             kapt(it)
         }
-    }().forEach {
-        implementation(it)
+        getDependencies().forEach {
+            implementation(it)
+        }
     }
 }
 
@@ -59,8 +60,18 @@ fun DependencyHandler.dagger() {
         getCompiler().forEach {
             kapt(it)
         }
-    }().forEach {
-        implementation(it)
+        getDependencies().forEach {
+            implementation(it)
+        }
+    }
+}
+
+fun DependencyHandler.compose() {
+    Dependencies.Compose.apply {
+        getDependencies().forEach {
+            implementation(it)
+        }
+
     }
 }
 
@@ -70,6 +81,10 @@ private fun DependencyHandler.implementation(depName: String) {
 
 private fun DependencyHandler.testImplementation(depName: String) {
     add("testImplementation", depName)
+}
+
+private fun DependencyHandler.androidTestImplementation(depName: String) {
+    add("androidTestImplementation", depName)
 }
 
 private fun DependencyHandler.kapt(depName: String) {

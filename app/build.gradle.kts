@@ -1,10 +1,8 @@
-@file:Suppress("UnstableApiUsage")
 import br.com.gustavomonteiro.buildsrc.*
 
 plugins {
     id("com.android.application")
     id("kotlin-android")
-    id("kotlin-android-extensions")
     id("kotlin-kapt")
 }
 
