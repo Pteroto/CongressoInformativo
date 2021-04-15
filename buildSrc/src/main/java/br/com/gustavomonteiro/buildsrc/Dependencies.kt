@@ -95,7 +95,7 @@ object Dependencies {
         private const val compose = "androidx.compose.ui:ui-test-junit4:$composeVersion"
 
         override fun getDependencies(): List<String> {
-            return listOf(junit, espresso, compose)
+            return listOf(junit, espresso)
         }
     }
 
