@@ -3,8 +3,8 @@ import br.com.gustavomonteiro.buildsrc.*
 plugins {
     id("com.android.library")
     id("kotlin-android")
-    id("kotlin-android-extensions")
     id("kotlin-kapt")
+    id("kotlin-parcelize")
 }
 
 android {

@@ -5,12 +5,12 @@ plugins {
 }
 
 buildscript {
-    val kotlinVersion by extra("1.4.10")
-    val androidGradleVersion by extra("4.1.1")
+    val kotlinVersion by extra("1.4.32")
+    val androidGradleVersion by extra("7.0.0-alpha14")
 
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
 
     dependencies {
@@ -40,7 +40,7 @@ allprojects {
 
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
 }
 

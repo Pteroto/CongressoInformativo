@@ -1,4 +1,4 @@
-rootProject.name = "Info Congresso"
+rootProject.name = "InfoCongresso"
 include(":app")
 include(":core")
 include(":camara-repository")

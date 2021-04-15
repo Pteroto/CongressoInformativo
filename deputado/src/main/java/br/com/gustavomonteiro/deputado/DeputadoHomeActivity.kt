@@ -6,13 +6,15 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.commit
 import androidx.fragment.app.commitNow
-import br.com.gustavomonteiro.camararepository.models.Deputado
+import br.com.gustavomonteiro.camararepository.model.Deputado
 import br.com.gustavomonteiro.core.viewBinding
 import br.com.gustavomonteiro.deputado.databinding.DeputadoHomeActivityBinding
 import br.com.gustavomonteiro.deputado.di.DeputadoComponent
 import br.com.gustavomonteiro.deputado.di.DeputadoComponentProvider
 import br.com.gustavomonteiro.deputado.ui.DeputadoDetailFragment
 import br.com.gustavomonteiro.deputado.ui.DeputadoHomeFragment
+import com.skydoves.transformationlayout.TransformationLayout
+import com.skydoves.transformationlayout.addTransformation
 
 class DeputadoHomeActivity : AppCompatActivity() {
     private val binding by viewBinding(DeputadoHomeActivityBinding::inflate)
@@ -35,10 +37,12 @@ class DeputadoHomeActivity : AppCompatActivity() {
         }
     }
 
-    fun gotoDetailFragment(deputado: Deputado) {
-        val fragment = DeputadoDetailFragment.newInstance(deputado.id, deputado.urlFoto)
+    fun gotoDetailFragment(deputado: Deputado, transformationLayout: TransformationLayout) {
+        val fragment =
+            DeputadoDetailFragment.newInstance(deputado, transformationLayout)
 
         supportFragmentManager.commit(true) {
+            addTransformation(transformationLayout)
             replace(R.id.container, fragment)
             addToBackStack(null)
         }

@@ -1,4 +1,4 @@
-package br.com.gustavomonteiro.camararepository.models
+package br.com.gustavomonteiro.camararepository.model
 
 sealed class ResultDeputadoDetail {
     data class Success(val deputado: DeputadoDetail) : ResultDeputadoDetail()

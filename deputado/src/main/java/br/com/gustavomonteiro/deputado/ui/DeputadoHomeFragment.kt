@@ -7,8 +7,8 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
-import br.com.gustavomonteiro.camararepository.models.Deputado
-import br.com.gustavomonteiro.camararepository.models.ResultDeputadoRequest
+import br.com.gustavomonteiro.camararepository.model.Deputado
+import br.com.gustavomonteiro.camararepository.model.ResultDeputadoRequest
 import br.com.gustavomonteiro.core.viewBinding
 import br.com.gustavomonteiro.deputado.DeputadoHomeActivity
 import br.com.gustavomonteiro.deputado.R
@@ -16,6 +16,8 @@ import br.com.gustavomonteiro.deputado.databinding.DeputadoHomeFragmentBinding
 import br.com.gustavomonteiro.deputado.di.ActivityScope
 import br.com.gustavomonteiro.deputado.presentation.DeputadoHomeViewModel
 import br.com.gustavomonteiro.deputado.presentation.factory.DeputadoHomeViewModelFactory
+import com.skydoves.transformationlayout.TransformationLayout
+import com.skydoves.transformationlayout.onTransformationStartContainer
 import javax.inject.Inject
 
 class DeputadoHomeFragment : Fragment(R.layout.deputado_home_fragment) {
@@ -25,6 +27,11 @@ class DeputadoHomeFragment : Fragment(R.layout.deputado_home_fragment) {
     lateinit var vmFactory: DeputadoHomeViewModelFactory
     private val viewModel: DeputadoHomeViewModel by viewModels { vmFactory }
     private val binding by viewBinding(DeputadoHomeFragmentBinding::bind)
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        onTransformationStartContainer()
+    }
 
     override fun onAttach(context: Context) {
         (activity as DeputadoHomeActivity).deputadoComponent.inject(this)
@@ -51,9 +58,10 @@ class DeputadoHomeFragment : Fragment(R.layout.deputado_home_fragment) {
 
     private fun onSucess(deputados: List<Deputado>) {
         setLoading(false)
-        binding.recyclerView.adapter = DeputadoAdapter(deputados) { deputado ->
-            onDeputadoClick(deputado)
-        }
+        binding.recyclerView.adapter =
+            DeputadoAdapter(deputados) { deputado, transformationLayout ->
+                onDeputadoClick(deputado, transformationLayout)
+            }
     }
 
     private fun onFailure(errorMsg: String) {
@@ -69,8 +77,8 @@ class DeputadoHomeFragment : Fragment(R.layout.deputado_home_fragment) {
         }
     }
 
-    private fun onDeputadoClick(deputado: Deputado) {
-        (activity as DeputadoHomeActivity?)?.gotoDetailFragment(deputado)
+    private fun onDeputadoClick(deputado: Deputado, transformationLayout: TransformationLayout) {
+        (activity as DeputadoHomeActivity?)?.gotoDetailFragment(deputado, transformationLayout)
     }
 
     private fun showDialogError(errorMsg: String) {

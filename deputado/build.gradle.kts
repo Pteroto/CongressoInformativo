@@ -5,7 +5,6 @@ import br.com.gustavomonteiro.buildsrc.*
 plugins {
     id("com.android.library")
     id("kotlin-android")
-    id("kotlin-android-extensions")
     id("kotlin-kapt")
 }
 
@@ -39,6 +38,7 @@ android {
 
     kotlinOptions {
         jvmTarget = "1.8"
+        useIR = true
     }
 
     buildFeatures {
@@ -59,4 +59,5 @@ dependencies {
     androidTest()
     dagger()
     glide()
+    implementation("com.github.skydoves:transformationlayout:1.0.8")
 }

@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import br.com.gustavomonteiro.camararepository.DeputadoRepository
-import br.com.gustavomonteiro.camararepository.models.ResultDeputadoRequest
+import br.com.gustavomonteiro.camararepository.model.ResultDeputadoRequest
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onStart

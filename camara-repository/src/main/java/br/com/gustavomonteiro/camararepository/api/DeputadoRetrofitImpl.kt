@@ -1,8 +1,8 @@
 package br.com.gustavomonteiro.camararepository.api
 
 import br.com.gustavomonteiro.camararepository.DeputadoRepository
-import br.com.gustavomonteiro.camararepository.models.ResultDeputadoDetail
-import br.com.gustavomonteiro.camararepository.models.ResultDeputadoRequest
+import br.com.gustavomonteiro.camararepository.model.ResultDeputadoDetail
+import br.com.gustavomonteiro.camararepository.model.ResultDeputadoRequest
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
