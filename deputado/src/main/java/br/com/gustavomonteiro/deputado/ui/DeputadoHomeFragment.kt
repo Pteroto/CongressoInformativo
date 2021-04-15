@@ -98,4 +98,3 @@ class DeputadoHomeFragment : Fragment(R.layout.deputado_home_fragment) {
         fun newInstance() = DeputadoHomeFragment()
     }
 }
-

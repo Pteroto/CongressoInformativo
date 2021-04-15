@@ -28,6 +28,7 @@ allprojects {
         outputToConsole.set(true)
         outputColorName.set("RED")
         ignoreFailures.set(true)
+        disabledRules.set(setOf("no-wildcard-imports"))
         reporters {
             reporter(ReporterType.HTML)
             reporter(ReporterType.CHECKSTYLE)
