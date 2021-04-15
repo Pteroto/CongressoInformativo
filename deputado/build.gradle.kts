@@ -1,5 +1,3 @@
-@file:Suppress("UnstableApiUsage")
-
 import br.com.gustavomonteiro.buildsrc.*
 
 plugins {
@@ -43,6 +41,10 @@ android {
 
     buildFeatures {
         viewBinding = true
+    }
+
+    lint {
+        isAbortOnError = false
     }
 }
 
