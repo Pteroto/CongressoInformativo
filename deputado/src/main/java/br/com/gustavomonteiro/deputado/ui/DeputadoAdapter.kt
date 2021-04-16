@@ -8,12 +8,11 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import br.com.gustavomonteiro.camararepository.model.Deputado
 import br.com.gustavomonteiro.deputado.R
-import com.bumptech.glide.Glide
-import com.skydoves.transformationlayout.TransformationLayout
+import br.com.gustavomonteiro.deputado.extensions.loadUrl
 
 class DeputadoAdapter(
     private val deputadoList: List<Deputado>,
-    private val onItemClick: (Deputado, TransformationLayout) -> Unit
+    private val onItemClick: (Deputado) -> Unit
 ) : RecyclerView.Adapter<DeputadoAdapter.DeputadoHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DeputadoHolder {
@@ -32,18 +31,16 @@ class DeputadoAdapter(
 
     inner class DeputadoHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        fun bindView(deputado: Deputado, onItemClick: (Deputado, TransformationLayout) -> Unit) {
+        fun bindView(deputado: Deputado, onItemClick: (Deputado) -> Unit) {
             val photo = itemView.findViewById<ImageView>(R.id.deputadoPhoto)
             val name = itemView.findViewById<TextView>(R.id.deputadoName)
+            val partido = itemView.findViewById<TextView>(R.id.partido)
 
-            val transformationLayout =
-                itemView.findViewById<TransformationLayout>(R.id.transformationLayout)
-            transformationLayout.transitionName = deputado.nome
-
-            Glide.with(itemView).load(deputado.urlFoto).into(photo)
+            photo.loadUrl(deputado.urlFoto)
             name.text = deputado.nome
+            partido.text = deputado.siglaPartido
             itemView.setOnClickListener {
-                onItemClick(deputado, transformationLayout)
+                onItemClick(deputado)
             }
         }
     }

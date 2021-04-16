@@ -42,10 +42,6 @@ android {
     buildFeatures {
         viewBinding = true
     }
-
-    lint {
-        isAbortOnError = false
-    }
 }
 
 dependencies {
@@ -61,5 +57,4 @@ dependencies {
     androidTest()
     dagger()
     glide()
-    implementation("com.github.skydoves:transformationlayout:1.0.8")
 }
