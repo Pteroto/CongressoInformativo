@@ -7,4 +7,6 @@
     <color name="blueLight">#5ddef4</color>
     <color name="greenLight">#4ebaaa</color>
     <color name="greenDark">#005b4f</color>
+    <color name="white">#ffffff</color>
+    <color name="light_gray">#efefef</color>
 </resources>

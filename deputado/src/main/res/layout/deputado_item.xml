@@ -20,21 +20,13 @@
         android:gravity="center"
         android:orientation="vertical">
 
-        <com.skydoves.transformationlayout.TransformationLayout
-            android:id="@+id/transformationLayout"
+        <ImageView
+            android:id="@+id/deputadoPhoto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:transformation_duration="500">
-
-            <ImageView
-                android:id="@+id/deputadoPhoto"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:minHeight="140dp"
-                android:scaleType="centerCrop"
-                tools:ignore="ContentDescription" />
-
-        </com.skydoves.transformationlayout.TransformationLayout>
+            android:minHeight="140dp"
+            android:scaleType="centerCrop"
+            tools:ignore="ContentDescription" />
 
         <TextView
             android:id="@+id/deputadoName"
@@ -42,6 +34,15 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginBottom="4dp"
+            android:textAlignment="center" />
+
+        <TextView
+            android:id="@+id/partido"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
             android:layout_marginEnd="4dp"
             android:layout_marginBottom="8dp"
             android:textAlignment="center" />

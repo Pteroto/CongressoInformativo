@@ -13,7 +13,7 @@ object Dependencies {
     }
 
     object Kotlin : Dependency {
-        private const val kotlinVersion = "1.4.30"
+        private const val kotlinVersion = "1.4.32"
 
         private const val kotlinStdLib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
 
