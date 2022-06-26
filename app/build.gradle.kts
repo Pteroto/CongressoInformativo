@@ -7,13 +7,13 @@ plugins {
 }
 
 android {
-    compileSdkVersion(AndroidConfig.compileSdkVersion)
-    buildToolsVersion(AndroidConfig.buildToolsVersion)
+    compileSdk = AndroidConfig.compileSdkVersion
+    buildToolsVersion = AndroidConfig.buildToolsVersion
 
     defaultConfig {
         applicationId = "br.com.gustavomonteiro.infocongresso"
-        minSdkVersion(AndroidConfig.minSdkVersion)
-        targetSdkVersion(AndroidConfig.targetSdkVersion)
+        minSdk = AndroidConfig.minSdkVersion
+        targetSdk = AndroidConfig.targetSdkVersion
         versionCode = AndroidConfig.versionCode
         versionName = AndroidConfig.versionName
 
@@ -31,16 +31,24 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
 
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "11"
     }
 
     buildFeatures {
         viewBinding = true
+    }
+
+    hilt {
+        enableAggregatingTask = true
+    }
+
+    packagingOptions {
+        resources.excludes += "DebugProbesKt.bin"
     }
 }
 
@@ -56,5 +64,6 @@ dependencies {
     test()
     androidTest()
     glide()
-    dagger()
+    hilt()
+    retrofit()
 }

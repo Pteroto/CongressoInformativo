@@ -6,9 +6,9 @@ import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
 
-interface CamaraApi {
+interface CongressmanApi {
     @GET("deputados/{id}")
-    fun getDeputado(@Path("id") id: String? = null): Call<ResponseDeputado>
+    fun getDeputado(@Path("id") id: String): Call<ResponseDeputado>
 
     @GET("deputados")
     fun getDeputados(): Call<ResponseDeputadoList>

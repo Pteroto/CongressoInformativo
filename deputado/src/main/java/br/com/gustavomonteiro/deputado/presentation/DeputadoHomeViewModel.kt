@@ -6,16 +6,20 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import br.com.gustavomonteiro.camararepository.DeputadoRepository
 import br.com.gustavomonteiro.camararepository.model.ResultDeputadoRequest
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class DeputadoHomeViewModel(private val repository: DeputadoRepository) : ViewModel() {
+@HiltViewModel
+class DeputadoHomeViewModel @Inject constructor(
+    private val repository: DeputadoRepository
+) : ViewModel() {
 
     private val internalRequestResult = MutableLiveData<ResultDeputadoRequest>()
     val requestResult: LiveData<ResultDeputadoRequest>
-    get() = internalRequestResult
+        get() = internalRequestResult
 
     init {
         getDeputados()

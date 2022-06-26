@@ -1,12 +1,13 @@
 import org.jlleitschuh.gradle.ktlint.reporter.ReporterType
 
 plugins {
-    id("org.jlleitschuh.gradle.ktlint").version("9.2.1")
+    id("org.jlleitschuh.gradle.ktlint") version "10.3.0"
 }
 
 buildscript {
-    val kotlinVersion by extra("1.4.32")
-    val androidGradleVersion by extra("7.0.0-alpha14")
+    val kotlinVersion by extra("1.7.0")
+    val androidGradleVersion by extra("7.2.1")
+    val hiltVersion by extra("2.42")
 
     repositories {
         google()
@@ -16,7 +17,14 @@ buildscript {
     dependencies {
         classpath("com.android.tools.build:gradle:$androidGradleVersion")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion")
+        classpath("com.google.dagger:hilt-android-gradle-plugin:$hiltVersion")
     }
+}
+
+configure(subprojects.filter {
+    !listOf("buildSrc", "core").contains(it.name)
+}) {
+    apply(plugin = "dagger.hilt.android.plugin")
 }
 
 allprojects {

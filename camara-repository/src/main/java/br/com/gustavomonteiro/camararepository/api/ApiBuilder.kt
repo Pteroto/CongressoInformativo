@@ -6,11 +6,15 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 class ApiBuilder {
     private val baseURL = "https://dadosabertos.camara.leg.br/api/v2/"
 
-    fun createApi(): CamaraApi {
-        val retrofit = Retrofit.Builder()
+    fun createRetrofit(): Retrofit =
+        Retrofit.Builder()
             .baseUrl(baseURL)
             .addConverterFactory(MoshiConverterFactory.create())
             .build()
-        return retrofit.create(CamaraApi::class.java)
-    }
+
+    fun createCongressmanApi(retrofit: Retrofit): CongressmanApi =
+        retrofit.create(CongressmanApi::class.java)
+
+    fun createVotesApi(retrofit: Retrofit): PollApi =
+        retrofit.create(PollApi::class.java)
 }

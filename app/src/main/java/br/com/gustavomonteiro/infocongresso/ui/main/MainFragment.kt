@@ -8,8 +8,6 @@ import br.com.gustavomonteiro.deputado.DeputadoHomeActivity
 import br.com.gustavomonteiro.infocongresso.R
 import br.com.gustavomonteiro.infocongresso.databinding.MainFragmentBinding
 import br.com.gustavomonteiro.infocongresso.ui.main.viewmodel.MainViewModel
-import br.com.gustavomonteiro.infocongresso.ui.main.viewmodel.MainViewModelFactory
-import javax.inject.Inject
 
 class MainFragment : Fragment(R.layout.main_fragment) {
 
@@ -17,10 +15,7 @@ class MainFragment : Fragment(R.layout.main_fragment) {
         fun newInstance() = MainFragment()
     }
 
-    @Inject
-    lateinit var vmFactory: MainViewModelFactory
-
-    private val viewModel: MainViewModel by viewModels { vmFactory }
+    private val viewModel: MainViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

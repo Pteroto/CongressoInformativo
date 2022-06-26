@@ -1,6 +1,5 @@
 package br.com.gustavomonteiro.deputado.ui
 
-import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AlertDialog
@@ -14,23 +13,14 @@ import br.com.gustavomonteiro.core.viewBinding
 import br.com.gustavomonteiro.deputado.DeputadoHomeActivity
 import br.com.gustavomonteiro.deputado.R
 import br.com.gustavomonteiro.deputado.databinding.DeputadoHomeFragmentBinding
-import br.com.gustavomonteiro.deputado.di.ActivityScope
 import br.com.gustavomonteiro.deputado.presentation.DeputadoHomeViewModel
-import br.com.gustavomonteiro.deputado.presentation.factory.DeputadoHomeViewModelFactory
-import javax.inject.Inject
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class DeputadoHomeFragment : Fragment(R.layout.deputado_home_fragment) {
 
-    @ActivityScope
-    @Inject
-    lateinit var vmFactory: DeputadoHomeViewModelFactory
-    private val viewModel: DeputadoHomeViewModel by viewModels { vmFactory }
+    private val viewModel: DeputadoHomeViewModel by viewModels()
     private val binding by viewBinding(DeputadoHomeFragmentBinding::bind)
-
-    override fun onAttach(context: Context) {
-        (activity as DeputadoHomeActivity).deputadoComponent.inject(this)
-        super.onAttach(context)
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -49,16 +39,16 @@ class DeputadoHomeFragment : Fragment(R.layout.deputado_home_fragment) {
             clipToPadding = false
         }
 
-        viewModel.requestResult.observe(viewLifecycleOwner, {
+        viewModel.requestResult.observe(viewLifecycleOwner) {
             when (it) {
-                is ResultDeputadoRequest.Success -> onSucess(it.deputadoList)
+                is ResultDeputadoRequest.Success -> onSuccess(it.deputadoList)
                 is ResultDeputadoRequest.Failure -> onFailure(it.errorMsg)
                 is ResultDeputadoRequest.Loading -> setLoading(it.status)
             }
-        })
+        }
     }
 
-    private fun onSucess(deputados: List<Deputado>) {
+    private fun onSuccess(deputados: List<Deputado>) {
         setLoading(false)
         binding.recyclerView.adapter =
             DeputadoAdapter(deputados) { deputado ->
