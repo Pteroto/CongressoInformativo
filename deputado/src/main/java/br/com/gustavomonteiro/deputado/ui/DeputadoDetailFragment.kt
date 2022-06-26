@@ -8,7 +8,9 @@ import br.com.gustavomonteiro.core.viewBinding
 import br.com.gustavomonteiro.deputado.R
 import br.com.gustavomonteiro.deputado.databinding.DeputadoDetailFragmentBinding
 import br.com.gustavomonteiro.deputado.extensions.loadUrlRounded
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class DeputadoDetailFragment : Fragment(R.layout.deputado_detail_fragment) {
     private val binding by viewBinding(DeputadoDetailFragmentBinding::bind)
 

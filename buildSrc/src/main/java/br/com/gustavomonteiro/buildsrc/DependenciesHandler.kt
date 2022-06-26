@@ -55,8 +55,8 @@ fun DependencyHandler.glide() {
     }
 }
 
-fun DependencyHandler.dagger() {
-    Dependencies.Dagger.apply {
+fun DependencyHandler.hilt() {
+    Dependencies.Hilt.apply {
         getCompiler().forEach {
             kapt(it)
         }

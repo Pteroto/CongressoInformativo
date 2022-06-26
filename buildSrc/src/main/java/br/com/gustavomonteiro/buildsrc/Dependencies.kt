@@ -1,7 +1,7 @@
 package br.com.gustavomonteiro.buildsrc
 
 object Dependencies {
-    private const val coroutineVersion = "1.4.1"
+    private const val coroutineVersion = "1.6.3"
     const val composeVersion = "1.0.0-beta01"
 
     private interface Dependency {
@@ -13,7 +13,7 @@ object Dependencies {
     }
 
     object Kotlin : Dependency {
-        private const val kotlinVersion = "1.4.32"
+        private const val kotlinVersion = "1.7.0"
 
         private const val kotlinStdLib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
 
@@ -29,7 +29,7 @@ object Dependencies {
 
     object Ktx : Dependency {
         private const val fragmentKtxVersion = "1.2.4"
-        private const val coreKtxVersion = "1.2.0"
+        private const val coreKtxVersion = "1.8.0"
 
         private const val fragmentKtx = "androidx.fragment:fragment-ktx:$fragmentKtxVersion"
         private const val coreKtx = "androidx.core:core-ktx:$coreKtxVersion"
@@ -40,22 +40,24 @@ object Dependencies {
     }
 
     object LifeCycle : Dependency {
-        private const val lifecycleKtxVersion = "2.2.0"
+        private const val lifecycleKtxVersion = "2.4.1"
 
-        private const val lifeCycleKtx =
-            "androidx.lifecycle:lifecycle-extensions:$lifecycleKtxVersion"
+        private const val runtimeKtx =
+            "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleKtxVersion"
+        private const val commonKtx =
+            "androidx.lifecycle:lifecycle-common-java8:$lifecycleKtxVersion"
         private const val viewModelKtx =
             "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleKtxVersion"
         private const val liveDataKtx =
             "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleKtxVersion"
 
         override fun getDependencies(): List<String> {
-            return listOf(lifeCycleKtx, viewModelKtx, liveDataKtx)
+            return listOf(viewModelKtx, liveDataKtx, runtimeKtx, commonKtx)
         }
     }
 
     object Android : Dependency {
-        private const val appCompatVersion = "1.1.0"
+        private const val appCompatVersion = "1.4.2"
         private const val constraintLayoutVersion = "2.0.0-beta6"
         private const val recyclerViewVersion = "28.0.0"
         private const val cardViewVersion = "28.0.0"
@@ -112,7 +114,7 @@ object Dependencies {
     }
 
     object Glide : Dependency {
-        private const val glideVersion = "4.11.0"
+        private const val glideVersion = "4.13.0"
 
         private const val glide = "com.github.bumptech.glide:glide:$glideVersion"
         private const val glideCompiler = "com.github.bumptech.glide:compiler:$glideVersion"
@@ -126,21 +128,18 @@ object Dependencies {
         }
     }
 
-    object Dagger : Dependency {
-        private const val daggerVersion = "2.27"
+    object Hilt : Dependency {
+        private const val hiltVersion = "2.42"
 
-        private const val dagger = "com.google.dagger:dagger:$daggerVersion"
-        private const val daggerCompiler = "com.google.dagger:dagger-compiler:$daggerVersion"
-        private const val daggerAndroid = "com.google.dagger:dagger-android:$daggerVersion"
-        private const val daggerAndroidCompiler =
-            "com.google.dagger:dagger-android-processor:$daggerVersion"
+        private const val hilt = "com.google.dagger:hilt-android:$hiltVersion"
+        private const val hiltCompiler = "com.google.dagger:hilt-android-compiler:$hiltVersion"
 
         override fun getDependencies(): List<String> {
-            return listOf(dagger, daggerAndroid)
+            return listOf(hilt)
         }
 
         fun getCompiler(): List<String> {
-            return listOf(daggerCompiler, daggerAndroidCompiler)
+            return listOf(hiltCompiler)
         }
     }
 

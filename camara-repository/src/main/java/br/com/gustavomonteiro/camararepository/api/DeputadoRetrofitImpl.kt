@@ -5,14 +5,15 @@ import br.com.gustavomonteiro.camararepository.model.ResultDeputadoDetail
 import br.com.gustavomonteiro.camararepository.model.ResultDeputadoRequest
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.flowOn
+import retrofit2.awaitResponse
 
-@Suppress("BlockingMethodInNonBlockingContext") // Bug https://youtrack.jetbrains.com/issue/KT-30320
-class DeputadoRetrofitImpl(private val api: CamaraApi) : DeputadoRepository {
+class DeputadoRetrofitImpl(private val api: CongressmanApi) : DeputadoRepository {
     override suspend fun getDeputado(id: String): ResultDeputadoDetail {
         try {
-            val response = api.getDeputado(id).execute()
+            val response = api.getDeputado(id).awaitResponse()
             response.body()?.let {
                 return when {
                     response.isSuccessful ->
@@ -31,7 +32,7 @@ class DeputadoRetrofitImpl(private val api: CamaraApi) : DeputadoRepository {
 
     override suspend fun getDeputados(): ResultDeputadoRequest {
         try {
-            val response = api.getDeputados().execute()
+            val response = api.getDeputados().awaitResponse()
             response.body()?.let {
                 return when {
                     response.isSuccessful -> ResultDeputadoRequest.Success(it.deputados)
@@ -49,16 +50,15 @@ class DeputadoRetrofitImpl(private val api: CamaraApi) : DeputadoRepository {
 
     override suspend fun getNewDeputados(): Flow<ResultDeputadoRequest> {
         return flowOf(
-            try {
-                ResultDeputadoRequest.Success(api.getNewDeputados().deputados)
-            } catch (exception: Exception) {
+            ResultDeputadoRequest.Success(api.getNewDeputados().deputados)
+        ).flowOn(Dispatchers.IO)
+            .catch {
                 ResultDeputadoRequest.Failure(
                     "Error msg: ${
-                        exception.message ?: UNKNOWN_ERROR_MSG
+                        it.message ?: UNKNOWN_ERROR_MSG
                     }"
                 )
             }
-        ).flowOn(Dispatchers.IO)
     }
 
     companion object {

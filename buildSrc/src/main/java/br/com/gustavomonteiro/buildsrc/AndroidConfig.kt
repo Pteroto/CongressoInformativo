@@ -1,7 +1,7 @@
 package br.com.gustavomonteiro.buildsrc
 
 object AndroidConfig {
-    const val compileSdkVersion = 30
+    const val compileSdkVersion = 31
     const val buildToolsVersion = "30.0.3"
 
     const val minSdkVersion = 21
