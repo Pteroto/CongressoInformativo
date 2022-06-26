@@ -56,7 +56,6 @@ dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
     implementation(project(":core"))
     implementation(project(":deputado"))
-    implementation(project(":camara-repository"))
     kotlin()
     android()
     lifecycle()
