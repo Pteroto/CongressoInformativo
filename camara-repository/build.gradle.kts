@@ -8,6 +8,7 @@ plugins {
 }
 
 android {
+    namespace = "br.com.gustavomonteiro.camararepository"
     compileSdk = AndroidConfig.compileSdkVersion
     buildToolsVersion = AndroidConfig.buildToolsVersion
 

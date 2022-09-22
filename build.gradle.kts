@@ -6,7 +6,7 @@ plugins {
 
 buildscript {
     val kotlinVersion by extra("1.7.0")
-    val androidGradleVersion by extra("7.2.1")
+    val androidGradleVersion by extra("7.3.0")
     val hiltVersion by extra("2.42")
 
     repositories {
