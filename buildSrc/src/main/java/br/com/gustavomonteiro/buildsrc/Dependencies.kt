@@ -2,7 +2,7 @@ package br.com.gustavomonteiro.buildsrc
 
 object Dependencies {
     private const val coroutineVersion = "1.6.3"
-    const val composeVersion = "1.0.0-beta01"
+    const val composeVersion = "1.2.1"
 
     private interface Dependency {
         fun getDependencies(): List<String>
@@ -89,8 +89,8 @@ object Dependencies {
     }
 
     object AndroidTest : Dependency {
-        private const val junitVersion = "1.1.2"
-        private const val espressoVersion = "3.2.0"
+        private const val junitVersion = "1.1.3"
+        private const val espressoVersion = "3.4.0"
 
         private const val junit = "androidx.test.ext:junit:$junitVersion"
         private const val espresso = "androidx.test.espresso:espresso-core:$espressoVersion"
@@ -144,8 +144,8 @@ object Dependencies {
     }
 
     object Compose : Dependency {
-        private const val composeActivityVersion = "1.3.0-alpha03"
-        private const val composeViewModelVersion = "1.0.0-alpha02"
+        private const val composeActivityVersion = "1.6.0"
+        private const val composeViewModelVersion = "2.5.1"
 
         private const val composeUi = "androidx.compose.ui:ui:$composeVersion"
         private const val composeUiTooling = "androidx.compose.ui:ui-tooling:$composeVersion"
