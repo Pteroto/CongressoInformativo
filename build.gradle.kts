@@ -1,7 +1,7 @@
 import org.jlleitschuh.gradle.ktlint.reporter.ReporterType
 
 plugins {
-    id("org.jlleitschuh.gradle.ktlint") version "10.3.0"
+    id("org.jlleitschuh.gradle.ktlint") version "11.0.0"
 }
 
 buildscript {
@@ -21,9 +21,11 @@ buildscript {
     }
 }
 
-configure(subprojects.filter {
-    !listOf("buildSrc", "core").contains(it.name)
-}) {
+configure(
+    subprojects.filter {
+        !listOf("buildSrc", "core").contains(it.name)
+    }
+) {
     apply(plugin = "dagger.hilt.android.plugin")
 }
 
