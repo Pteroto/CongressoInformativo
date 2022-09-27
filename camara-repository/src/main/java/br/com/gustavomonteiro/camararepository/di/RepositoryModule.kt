@@ -28,5 +28,4 @@ class RepositoryModule {
     @Provides
     fun provideVotesApi(retrofit: Retrofit) =
         ApiBuilder().createVotesApi(retrofit)
-
 }

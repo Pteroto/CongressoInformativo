@@ -24,7 +24,7 @@ class DeputadoRetrofitImpl(private val api: CongressmanApi) : DeputadoRepository
         } catch (exception: Exception) {
             return ResultDeputadoDetail.Error(
                 "Error msg: ${
-                    exception.message ?: DEPUTADO_NOT_FOUND_MSG
+                exception.message ?: DEPUTADO_NOT_FOUND_MSG
                 }"
             )
         }
@@ -42,7 +42,7 @@ class DeputadoRetrofitImpl(private val api: CongressmanApi) : DeputadoRepository
         } catch (exception: Exception) {
             return ResultDeputadoRequest.Failure(
                 "Error msg: ${
-                    exception.message ?: DEPUTADO_NOT_FOUND_MSG
+                exception.message ?: DEPUTADO_NOT_FOUND_MSG
                 }"
             )
         }
@@ -55,7 +55,7 @@ class DeputadoRetrofitImpl(private val api: CongressmanApi) : DeputadoRepository
             .catch {
                 ResultDeputadoRequest.Failure(
                     "Error msg: ${
-                        it.message ?: UNKNOWN_ERROR_MSG
+                    it.message ?: UNKNOWN_ERROR_MSG
                     }"
                 )
             }
